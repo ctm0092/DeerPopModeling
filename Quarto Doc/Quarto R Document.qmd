@@ -6,4 +6,137 @@ editor: visual
 ---
 
 ```         
+1/15/24
+
+Simple linear models
+
+Components of population change
+
+Nt = Population size at time t
+
+Nt+1 = Population size at the next time step
+
+B = Births
+
+D = Deaths
+
+I = Immigration
+
+E = Emigration
+
+Nt+1 = Nt + B + I - D - E
+
+
+
+Assumptions:
+
+Closed population
+Nt+1 = Nt + B + I - D - E
+
+Nt+1 = Nt + B - D
+
+$delta$N = Nt+1 - Nt = B - D
+
+Continuous growth
+Births and deaths happen continually
+
+$dN/dt$ = B - D
+
+b = instantaneous (per capita) rate = B/N
+
+B = bN
+
+d = D/N
+
+D = dN
+
+$dN/dt$ = B - D = bN - dN = (b-d)N
+
+b and d constant; unlimited resources, no age structure (young and old both have the same birth and death rates), no genetic structure.
+
+Exponential growth model
+
+$dN/dt$ = (b-d)N = rN
+
+r = instantaneous rate of increase (intrinsic rate of increase) - per individual rate of population increase
+
+r > 0?
+
+r = 0
+
+r < 0?
+
+r = $dN/dt$ * 1/N instantaneous contribution each animal makes to population growth
+
+Integrating $dN/dt$ = rN….
+
+Nt = N0 e^rt
+
+N0 initial population size, Nt population size at time t, e is a constant - base of the natural logarithm ~ 2.717
+
+Same equation that banks use to compound interest in your savings account
+```
+
+##Quiz Questions## Quiz 1
+
+Estimate the size of a white-tailed deer population for Lee County Alabama in 2030, assuming a population size of 8000 in 2025, r = 0.05.
+
+Write a function in R to calculate population size using the equation Nt = N0 e\^rt .
+
+```{r}
+N0=8000
+r=0.05
+t=5
+
+##Equation##
+Nt = N0 * exp(r * t)
+
+##Function##
+deerpopFUN = function(N0, r, t) {
+  Nt = N0 * exp(r * t)
+  return(Nt)
+}
+
+deerpop5year = dpopFUN(N0, r, t)
+deerpop5year
+
+##Answer = 10,272.2 deer ##
+```
+
+Quiz 2
+
+There are 5000 fish in a pond. During a one-month period, you record 750 births and 250 deaths in this population. Assuming population growth is continuous, estimate b, d and r and project the population size in ten months.
+
+```{r}
+N0 = 5000 
+B  = 750  
+D  = 250  
+t  = 10
+
+##Equation##
+b = B / N0 
+b
+d = D / N0 
+d
+r = b - d    
+r
+Nt = N0 * exp(r * t)
+
+##Function##
+fishpopFUN = function(N0, r, t) {
+  b = B / N0
+  d = D / N0
+  r = b - d
+  Nt = N0 * exp(r * t)
+  return(Nt)
+}
+
+fishpop10month = fishpopFUN(N0, r, t)
+fishpop10month
+
+##Answers##
+##b = 0.15##
+##d = 0.05##
+##r = 0.1##
+##Pop in 10 months = 13591.41##
 ```
